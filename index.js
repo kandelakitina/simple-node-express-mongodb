@@ -1,14 +1,16 @@
 // blog_app/index.js
 import express from "express";
 import connectDB from "./config/db.js";
+import ArticleRouter from "./routes/ArticleRouter.js";
 
 const app = express();
 const PORT = 3000;
 
-connectDB();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api", ArticleRouter);
+
+connectDB();
 
 app.get("/", (request, response) => {
 	response.send({ message: "Hello from an Express API!" });
